@@ -35,7 +35,7 @@ version = 2
           runtime_type = "io.containerd.runc.v2"
     [plugins."io.containerd.grpc.v1.cri".registry]
       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."172.16.8.22:9001"                                                                                             ]
-          endpoint = ["http://172.16.8.22:9001"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry:9001"                                                                                             ]
+          endpoint = ["http://registry:9001"]
           
 4) after that everything is work
