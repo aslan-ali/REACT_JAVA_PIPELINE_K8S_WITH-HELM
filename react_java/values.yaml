@@ -1,0 +1,15 @@
+container:
+  reactapp:      
+    image: 172.16.8.22:9001/repository/image-repo/react-front
+    replicaCount: 1
+    port: '4884'
+    tag: ""
+    type: ClusterIP
+    name: react-front
+  backapp:
+    image: 172.16.8.22:9001/repository/image-repo/django-back
+    replicaCount: 1
+    port: '8000'
+    tag: ""
+    type: ClusterIP
+    name: django-back

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.container.backapp.name }}-microsvc
+  namespace: devops
+  labels:
+    app: {{ .Values.container.backapp.name }}
+spec:
+  replicas: {{ .Values.container.backapp.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.container.backapp.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.container.backapp.name }}
+    spec:
+      containers:
+      - name: react-app
+        image: '{{ .Values.container.backapp.image }}:{{ .Values.container.backapp.tag }}'
+        ports:
+        - containerPort: {{ .Values.container.backapp.port }}
+      imagePullSecrets:
+      - name: secretreg
+
+

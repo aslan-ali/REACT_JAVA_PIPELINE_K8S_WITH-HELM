@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application renders 1`] = `
+<App>
+  <Store
+    data={
+      Object {
+        "navigate": [Function],
+      }
+    }
+    initialState={
+      Object {
+        "appReady": false,
+        "user": null,
+      }
+    }
+    tag="App"
+  >
+    <Index>
+      <Header>
+        <nav
+          className="navbar navbar-light"
+        >
+          <div
+            className="container"
+          >
+            <Link
+              className="navbar-brand"
+              to="/"
+            >
+              <a
+                className="navbar-brand"
+                href="/"
+                onClick={[Function]}
+              >
+                conduit
+              </a>
+            </Link>
+            <LoggedOut>
+              <ul
+                className="nav navbar-nav pull-xs-right"
+              >
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    to="/"
+                  >
+                    <NavLink
+                      className={[Function]}
+                      to="/"
+                    >
+                      <Link
+                        aria-current="page"
+                        className="nav-link active"
+                        to="/"
+                      >
+                        <a
+                          aria-current="page"
+                          className="nav-link active"
+                          href="/"
+                          onClick={[Function]}
+                        >
+                          Home
+                        </a>
+                      </Link>
+                    </NavLink>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    to="/login"
+                  >
+                    <NavLink
+                      className={[Function]}
+                      to="/login"
+                    >
+                      <Link
+                        className="nav-link "
+                        to="/login"
+                      >
+                        <a
+                          className="nav-link "
+                          href="/login"
+                          onClick={[Function]}
+                        >
+                          Sign in
+                        </a>
+                      </Link>
+                    </NavLink>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    to="/register"
+                  >
+                    <NavLink
+                      className={[Function]}
+                      to="/register"
+                    >
+                      <Link
+                        className="nav-link "
+                        to="/register"
+                      >
+                        <a
+                          className="nav-link "
+                          href="/register"
+                          onClick={[Function]}
+                        >
+                          Sign up
+                        </a>
+                      </Link>
+                    </NavLink>
+                  </NavLink>
+                </li>
+              </ul>
+            </LoggedOut>
+          </div>
+        </nav>
+      </Header>
+      <LoadMask
+        loading={true}
+      >
+        <div
+          className="load-mask "
+        >
+          <div
+            className="load-mask-inner"
+          >
+            <i
+              className="ion ion-load-c load-spinner"
+              style={
+                Object {
+                  "fontSize": "50px",
+                }
+              }
+            />
+          </div>
+        </div>
+      </LoadMask>
+    </Index>
+  </Store>
+</App>
+`;

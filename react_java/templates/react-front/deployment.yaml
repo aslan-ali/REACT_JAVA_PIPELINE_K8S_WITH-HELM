@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.container.reactapp.name }}-microsvc
+  namespace: devops
+  labels:
+    app: {{ .Values.container.reactapp.name }}
+spec:
+  replicas: {{ .Values.container.reactapp.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.container.reactapp.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.container.reactapp.name }}
+    spec:
+      containers:
+      - name: react-app
+        image: '{{ .Values.container.reactapp.image }}:{{ .Values.container.reactapp.tag }}'
+        ports:
+        - containerPort: {{ .Values.container.reactapp.port }}
+      imagePullSecrets:
+      - name: secretreg
+
+

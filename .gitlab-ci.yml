@@ -1,0 +1,72 @@
+stages:
+  - build
+  - deploy_dev
+  - deploy_prod
+
+variables:
+  IMAGE_NAME_FRONT: 172.16.8.22:9001/repository/image-repo/react-front
+  IMAGE_NAME_BACK: 172.16.8.22:9001/repository/image-repo/django-back
+  TAG_VERSION_BACK: 1.0.0
+  NAMESPACE: devops
+  REGISTRY: http://172.16.8.22:9001/repository/image-repo/
+
+build_frontend:
+  stage: build
+  tags:
+    - shell
+  before_script:
+    - cd realworld-example
+    - export PACKAGE_VERSION=$(cat package.json | jq -r .version)
+    - export TAG_VERSION=$PACKAGE_VERSION.$CI_PIPELINE_IID
+    - echo "TAG_VERSION=$TAG_VERSION" >> front.env
+  script:
+    - docker build . -t $IMAGE_NAME_FRONT:$TAG_VERSION
+  artifacts:
+    reports:
+      dotenv: realworld-example/front.env
+  only:
+    changes:
+      - "realworld-example/**/*"
+
+push_frontend:
+  stage: build
+  tags:
+    - shell
+  needs:
+    - build_frontend
+  before_script:
+    - docker login -u $USER -p $PASSWD $REGISTRY
+  script:
+    - docker push $IMAGE_NAME_FRONT:$TAG_VERSION 
+  only:
+    changes:
+      - "realworld-example/**/*"
+
+build_backend:
+  stage: build
+  tags:
+    - shell
+  before_script:
+    - cd django-realworld-example-app
+    - export TAG_VERSION_SECOND=$TAG_VERSION_BACK.$CI_PIPELINE_IID
+    - echo "TAG_VERSION_SECOND=$TAG_VERSION_SECOND" >> back.env
+  script:
+    - docker build . -t $IMAGE_NAME_BACK:$TAG_VERSION_SECOND
+    - docker login -u $USER -p $PASSWD $REGISTRY
+    - docker push $IMAGE_NAME_BACK:$TAG_VERSION_SECOND
+  artifacts:
+    reports:
+      dotenv: django-realworld-example-app/back.env
+  only:
+    changes:
+      - "django-realworld-example-app/**/*"
+
+deploy_dev:
+  stage: deploy_dev
+  tags: 
+    - shell
+  script:
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl create ns devops || echo "This namespace exist"
+    - kubectl create secret docker-registry secretreg --docker-server=$REGISTRY --docker-username=$USER --docker-password=$PASSWD --docker-email=aslanray1995@gmail.com --namespace=devops || echo "This secret already exist"
+    - helm upgrade --install microservice react_java/ --set container.reactapp.tag=$TAG_VERSION --set container.backapp.tag=$TAG_VERSION_SECOND --namespace=devops
