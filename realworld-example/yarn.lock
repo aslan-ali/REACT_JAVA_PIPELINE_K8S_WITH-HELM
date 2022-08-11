@@ -10217,10 +10217,10 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-statium@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/statium/-/statium-1.0.4.tgz#eab674ffbe4acf8864bc0a763469d0b2560e1b9e"
-  integrity sha512-nAbnWOOGNg3uwTkaedczhQElt5giD+3IB1kHNbVbJn3EH0QxjTlDFqhy9vSZXc98sEllnS0i+2QME70x4ezjHw==
+statium@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/statium/-/statium-1.0.5.tgz#90e22f3e2a1bf6560eb66a443e7cbacc2673f35c"
+  integrity sha512-rIZRK/aAxiXzeg5QCD0RkBAFUlPjXZK7SvqgEq6Ccaz//XKM2cWlo+P7A8/Fnn4ePN8b+fFdiPRiUGMTgORN4g==
 
 "statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2", statuses@~1.5.0:
   version "1.5.0"
